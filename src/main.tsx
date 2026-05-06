@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Auth0Provider } from '@auth0/auth0-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { App } from './App';
+import { AuthProvider } from './lib/auth';
 import './styles.css';
 
 const queryClient = new QueryClient({
@@ -14,16 +14,8 @@ const queryClient = new QueryClient({
   },
 });
 
-const domain = import.meta.env.VITE_AUTH0_DOMAIN;
-const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-const missingEnv = [
-  ['VITE_AUTH0_DOMAIN', domain],
-  ['VITE_AUTH0_CLIENT_ID', clientId],
-  ['VITE_AUTH0_AUDIENCE', audience],
-  ['VITE_API_BASE_URL', apiBaseUrl],
-]
+const missingEnv = [['VITE_API_BASE_URL', apiBaseUrl]]
   .filter(([, value]) => !value)
   .map(([key]) => key);
 
@@ -44,18 +36,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     {missingEnv.length ? (
       <MissingEnvScreen />
     ) : (
-      <Auth0Provider
-        domain={domain}
-        clientId={clientId}
-        authorizationParams={{
-          redirect_uri: window.location.origin,
-          audience,
-        }}
-      >
+      <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <App />
         </QueryClientProvider>
-      </Auth0Provider>
+      </AuthProvider>
     )}
   </React.StrictMode>,
 );

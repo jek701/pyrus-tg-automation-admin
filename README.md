@@ -7,10 +7,9 @@ React admin panel for managing Pyrus -> Telegram sync integrations.
 Create `.env.local` with:
 
 ```bash
-VITE_AUTH0_DOMAIN=your-tenant.auth0.com
-VITE_AUTH0_CLIENT_ID=your-auth0-client-id
-VITE_AUTH0_AUDIENCE=your-api-audience
 VITE_API_BASE_URL=http://localhost:3000
+VITE_ADMIN_USERNAME=admin
+VITE_ADMIN_PASSWORD=admin
 ```
 
 ## Scripts
@@ -21,4 +20,4 @@ npm run dev
 npm run build
 ```
 
-The app uses Auth0 SDK token handling and sends `Authorization: Bearer <access_token>` on every API request.
+Authentication uses a single fixed username/password set via `VITE_ADMIN_USERNAME` and `VITE_ADMIN_PASSWORD` (defaults: `admin` / `admin`). The session is stored in `localStorage`.

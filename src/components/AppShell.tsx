@@ -1,10 +1,10 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { LogOut } from 'lucide-react';
 import type { PropsWithChildren } from 'react';
+import { useAuth } from '../lib/auth';
 
 export function AppShell({ children }: PropsWithChildren) {
-  const { user, logout } = useAuth0();
-  const displayName = user?.email || user?.name || 'Admin';
+  const { username, logout } = useAuth();
+  const displayName = username || 'Admin';
 
   return (
     <div className="appShell">
@@ -14,10 +14,7 @@ export function AppShell({ children }: PropsWithChildren) {
         </div>
         <div className="topbarActions">
           <span className="userIdentity">{displayName}</span>
-          <button
-            className="ghostButton"
-            onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-          >
+          <button className="ghostButton" onClick={() => logout()}>
             <LogOut size={16} />
             Logout
           </button>

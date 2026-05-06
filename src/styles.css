@@ -102,6 +102,43 @@ select:disabled {
   line-height: 1.5;
 }
 
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.loginForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #3a4658;
+}
+
+.loginForm input {
+  padding: 10px 12px;
+  border: 1px solid #d7e0eb;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.loginForm input:focus {
+  outline: none;
+  border-color: #0e6f66;
+  box-shadow: 0 0 0 3px rgba(14, 111, 102, 0.18);
+}
+
+.loginError {
+  padding: 10px 12px;
+  border: 1px solid #f1c4c4;
+  border-radius: 6px;
+  background: #fdecec;
+  color: #a12828;
+  font-size: 13px;
+}
+
 .envList {
   margin: 0;
   padding: 14px;

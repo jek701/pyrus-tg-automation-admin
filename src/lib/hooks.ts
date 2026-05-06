@@ -1,12 +1,10 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { createApiClient } from './api';
 import type { IntegrationPayload } from '../types/api';
 
 export function useApiClient() {
-  const { getAccessTokenSilently } = useAuth0();
-  return useMemo(() => createApiClient(getAccessTokenSilently), [getAccessTokenSilently]);
+  return useMemo(() => createApiClient(), []);
 }
 
 export function useIntegrations(search: string, page = 1, limit = 50) {
