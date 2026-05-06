@@ -1,0 +1,675 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.64;
+}
+
+.pageLoader,
+.loginScreen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.pageLoader {
+  color: #526071;
+  gap: 8px;
+}
+
+.pageLoaderError {
+  color: #a12828;
+}
+
+.loginScreen {
+  background:
+    linear-gradient(135deg, rgba(14, 91, 140, 0.12), transparent 34%),
+    linear-gradient(315deg, rgba(20, 126, 95, 0.14), transparent 42%),
+    #f6f8fb;
+}
+
+.loginPanel {
+  width: min(420px, 100%);
+  padding: 34px;
+  border: 1px solid #dfe5ee;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 18px 60px rgba(20, 31, 51, 0.12);
+}
+
+.loginMark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #0e6f66;
+  background: #e7f6f2;
+}
+
+.loginPanel h1,
+.topbar h1,
+.toolbarTitle h2,
+.integrationPanel h2,
+.formSection h3,
+.emptyState h3,
+.confirmDialog h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.loginPanel h1 {
+  margin-top: 24px;
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.loginPanel p {
+  margin: 10px 0 24px;
+  color: #617083;
+  line-height: 1.5;
+}
+
+.envList {
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #d7e0eb;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #263447;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.appShell {
+  min-height: 100vh;
+}
+
+.topbar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 28px;
+  border-bottom: 1px solid #dde4ee;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar h1 {
+  font-size: 18px;
+  font-weight: 720;
+}
+
+.topbarActions,
+.toolbarControls,
+.rowActions,
+.dialogActions,
+.panelFooter,
+.sectionHeader,
+.panelMeta {
+  display: flex;
+  align-items: center;
+}
+
+.topbarActions {
+  gap: 12px;
+}
+
+.userIdentity {
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #526071;
+  font-size: 14px;
+}
+
+.mainContent {
+  padding: 28px;
+}
+
+.pageStack {
+  display: grid;
+  gap: 16px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.toolbarTitle h2 {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.toolbarTitle span {
+  display: block;
+  margin-top: 3px;
+  color: #667386;
+  font-size: 14px;
+}
+
+.toolbarControls {
+  gap: 10px;
+}
+
+.searchField {
+  width: min(360px, 36vw);
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid #d3dce8;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #6c7788;
+}
+
+.searchField input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: #172033;
+  background: transparent;
+  font-size: 14px;
+}
+
+.primaryButton,
+.secondaryButton,
+.ghostButton,
+.dangerButton,
+.iconButton {
+  border: 0;
+  border-radius: 6px;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 650;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.primaryButton {
+  padding: 0 15px;
+  background: #0d7067;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(13, 112, 103, 0.18);
+}
+
+.primaryButton:hover {
+  background: #0a5f58;
+}
+
+.secondaryButton,
+.ghostButton {
+  padding: 0 13px;
+  border: 1px solid #ccd6e3;
+  background: #ffffff;
+  color: #263447;
+}
+
+.secondaryButton:hover,
+.ghostButton:hover {
+  background: #f6f8fb;
+  border-color: #b8c5d5;
+}
+
+.dangerButton {
+  padding: 0 15px;
+  background: #c83232;
+  color: #ffffff;
+}
+
+.dangerButton:hover {
+  background: #ae2929;
+}
+
+.largeButton {
+  width: 100%;
+  height: 44px;
+}
+
+.compactButton {
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.iconButton {
+  width: 34px;
+  min-height: 34px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #526071;
+}
+
+.iconButton:hover {
+  background: #edf2f8;
+  color: #172033;
+}
+
+.dangerIcon {
+  color: #b23030;
+}
+
+.contentPanel {
+  min-height: 420px;
+  border: 1px solid #dfe5ee;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.integrationsTable {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+.integrationsTable th {
+  height: 42px;
+  padding: 0 16px;
+  border-bottom: 1px solid #e4eaf2;
+  background: #f8fafc;
+  color: #667386;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.integrationsTable td {
+  height: 58px;
+  padding: 0 16px;
+  border-bottom: 1px solid #edf1f6;
+  color: #334155;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.integrationsTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.nameCell {
+  color: #152238;
+  font-weight: 700;
+}
+
+.monoCell {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+}
+
+.actionsColumn {
+  width: 136px;
+}
+
+.rowActions {
+  gap: 4px;
+}
+
+.statusBadge,
+.secretBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+.statusBadge.enabled {
+  color: #08705f;
+  background: #e6f6f2;
+}
+
+.statusBadge.disabled {
+  color: #7a4b12;
+  background: #fff0d8;
+}
+
+.secretBadge {
+  color: #3453a3;
+  background: #eaf0ff;
+}
+
+.errorBanner {
+  padding: 12px 14px;
+  border: 1px solid #f1c7c7;
+  border-radius: 6px;
+  background: #fff1f1;
+  color: #9f2424;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stateBlock,
+.emptyState,
+.panelLoading {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  color: #617083;
+  font-size: 14px;
+}
+
+.emptyState {
+  align-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 36px;
+}
+
+.emptyState h3 {
+  color: #172033;
+  font-size: 20px;
+}
+
+.emptyState p {
+  margin: 0 0 8px;
+  color: #667386;
+}
+
+.panelBackdrop,
+.dialogBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.34);
+  z-index: 40;
+}
+
+.integrationPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(720px, 100vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  box-shadow: -24px 0 60px rgba(15, 23, 42, 0.2);
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  border-bottom: 1px solid #e1e7f0;
+}
+
+.panelHeader h2 {
+  font-size: 20px;
+}
+
+.panelMeta {
+  gap: 10px;
+  margin-top: 8px;
+  color: #667386;
+  font-size: 13px;
+}
+
+.panelForm {
+  padding: 18px 24px 0;
+  overflow-y: auto;
+}
+
+.formSection {
+  padding: 0 0 20px;
+  border-bottom: 1px solid #edf1f6;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sectionHeader {
+  grid-column: 1 / -1;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 32px;
+}
+
+.sectionHeader h3 {
+  color: #172033;
+  font-size: 14px;
+  font-weight: 780;
+  text-transform: uppercase;
+}
+
+.formSection label {
+  display: grid;
+  gap: 6px;
+  color: #4b5a6d;
+  font-size: 13px;
+  font-weight: 680;
+}
+
+.formSection input,
+.formSection select {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #ccd6e3;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #172033;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.formSection input:focus,
+.formSection select:focus,
+.searchField:focus-within {
+  border-color: #0d7067;
+  box-shadow: 0 0 0 3px rgba(13, 112, 103, 0.12);
+}
+
+.switchField {
+  align-self: end;
+  min-height: 38px;
+  display: inline-flex !important;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: 9px !important;
+}
+
+.switchField input {
+  width: 18px;
+  height: 18px;
+  accent-color: #0d7067;
+}
+
+.rulesList {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 10px;
+}
+
+.ruleRow {
+  display: grid;
+  grid-template-columns: 120px 140px minmax(160px, 1fr) 110px 38px;
+  gap: 10px;
+  align-items: end;
+  padding: 12px;
+  border: 1px solid #e1e7f0;
+  border-radius: 8px;
+  background: #fbfcfe;
+}
+
+.ruleSwitch {
+  margin-bottom: 1px;
+}
+
+.fieldError {
+  color: #b23030;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 650;
+}
+
+.panelFooter {
+  position: sticky;
+  bottom: 0;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 0 18px;
+  background: #ffffff;
+  border-top: 1px solid #edf1f6;
+}
+
+.detailsFooter {
+  justify-content: flex-start;
+  color: #667386;
+  font-size: 13px;
+}
+
+.detailsFooter span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dialogBackdrop {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 60;
+}
+
+.confirmDialog {
+  width: min(420px, 100%);
+  padding: 24px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+}
+
+.warningIcon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #b36a05;
+  background: #fff4db;
+}
+
+.confirmDialog h2 {
+  margin-top: 16px;
+  font-size: 20px;
+}
+
+.confirmDialog p {
+  margin: 8px 0 22px;
+  color: #617083;
+  line-height: 1.45;
+}
+
+.dialogActions {
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.spin {
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 860px) {
+  .topbar,
+  .toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .topbar {
+    padding: 16px 20px;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
+
+  .toolbarControls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .searchField {
+    width: 100%;
+  }
+
+  .formSection,
+  .ruleRow {
+    grid-template-columns: 1fr;
+  }
+
+  .integrationPanel {
+    width: 100vw;
+  }
+}
