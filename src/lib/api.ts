@@ -1,4 +1,4 @@
-import type { Integration, IntegrationPayload, IntegrationsResponse, ApiErrorPayload } from '../types/api';
+import type { Integration, IntegrationPayload, IntegrationsResponse, ApiErrorPayload, TopicIconPresetsResponse } from '../types/api';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
@@ -7,12 +7,32 @@ async function parseResponse<T>(response: Response): Promise<T> {
   const data = text ? JSON.parse(text) : null;
 
   if (!response.ok) {
-    const payload = data as ApiErrorPayload | null;
-    const message = payload?.message || payload?.error || `Request failed with status ${response.status}`;
-    throw new Error(message);
+    const payload = data as (ApiErrorPayload & { details?: unknown }) | null;
+    const baseMessage = payload?.message || payload?.error || `Request failed with status ${response.status}`;
+    const detailLines = formatValidationDetails(payload?.details);
+    throw new Error(detailLines.length > 0 ? `${baseMessage}: ${detailLines.join('; ')}` : baseMessage);
   }
 
   return data as T;
+}
+
+function formatValidationDetails(details: unknown): string[] {
+  if (!details || typeof details !== 'object') return [];
+  const lines: string[] = [];
+  walk(details as Record<string, unknown>, [], lines);
+  return lines.slice(0, 8);
+}
+
+function walk(node: Record<string, unknown>, path: string[], out: string[]): void {
+  for (const [key, value] of Object.entries(node)) {
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        if (typeof item === 'string') out.push(`${[...path, key].join('.')} — ${item}`);
+      }
+    } else if (value && typeof value === 'object') {
+      walk(value as Record<string, unknown>, [...path, key], out);
+    }
+  }
 }
 
 export function createApiClient() {
@@ -59,6 +79,9 @@ export function createApiClient() {
       return request<void>(`/api/integrations/${id}`, {
         method: 'DELETE',
       });
+    },
+    listTopicIconPresets() {
+      return request<TopicIconPresetsResponse>('/api/topic-icons');
     },
   };
 }

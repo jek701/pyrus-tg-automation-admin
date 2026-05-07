@@ -46,6 +46,16 @@ export function useUpdateIntegration() {
   });
 }
 
+export function useTopicIconPresets() {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ['topic-icon-presets'],
+    queryFn: () => api.listTopicIconPresets(),
+    staleTime: 6 * 60 * 60 * 1000,
+    retry: 1,
+  });
+}
+
 export function useDeleteIntegration() {
   const api = useApiClient();
   const queryClient = useQueryClient();

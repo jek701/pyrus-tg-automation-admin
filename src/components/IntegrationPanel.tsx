@@ -4,6 +4,9 @@ import { CheckCircle2, KeyRound, Save, X } from 'lucide-react';
 import { useEffect } from 'react';
 import type { Integration, IntegrationPayload } from '../types/api';
 import { useIntegration } from '../lib/hooks';
+import { StaleAlertsSection } from './StaleAlertsSection';
+import { StaleReplyRulesEditor } from './StaleReplyRulesEditor';
+import { TopicIconRulesEditor } from './TopicIconRulesEditor';
 import { WatchRulesEditor } from './WatchRulesEditor';
 import { getDefaultValues, integrationSchema, toPayload, type IntegrationFormValues } from './integrationForm';
 import { StatusBadge } from './StatusBadge';
@@ -31,8 +34,8 @@ export function IntegrationPanel({
   onModeChange,
   onSubmit,
 }: IntegrationPanelProps) {
-  const { data: fullIntegration, isLoading } = useIntegration(open && integration?.id ? integration.id : undefined);
-  const currentIntegration = fullIntegration ?? integration ?? undefined;
+  const { isLoading } = useIntegration(open && integration?.id ? integration.id : undefined);
+  const currentIntegration = integration ?? undefined;
   const readOnly = mode === 'view';
 
   const {
@@ -208,7 +211,19 @@ export function IntegrationPanel({
             />
           </section>
 
+          <StaleAlertsSection
+            register={register}
+            control={control}
+            errors={errors}
+            readOnly={readOnly}
+            currentThreadId={currentIntegration?.stale_alerts?.thread_id ?? null}
+          />
+
           <WatchRulesEditor control={control} register={register} errors={errors} readOnly={readOnly} />
+
+          <StaleReplyRulesEditor control={control} register={register} errors={errors} readOnly={readOnly} />
+
+          <TopicIconRulesEditor control={control} register={register} errors={errors} readOnly={readOnly} />
 
           {!readOnly ? (
             <div className="panelFooter">
